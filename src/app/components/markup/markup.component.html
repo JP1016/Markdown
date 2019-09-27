@@ -1,8 +1,10 @@
 <div class="split">
   <as-split direction="horizontal">
     <as-split-area [size]="action.text">
-      <div id="editor" contenteditable="true" class="editor" [formControl]="markupCtrl" #markupPad>
-      </div>
+      <!-- <div id="editor" contenteditable="true" class="editor" [formControl]="markupCtrl" #markupPad>
+      </div> -->
+      <textarea class="variable-textarea" [(ngModel)]="markdownData"></textarea>
+
     </as-split-area>
     <as-split-area [size]="action.markup" class="mark-pad">
       <markdown [data]="markdownData"></markdown>

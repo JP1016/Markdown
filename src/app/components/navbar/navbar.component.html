@@ -12,15 +12,57 @@
         [matTooltipPosition]="'below'">
         <i-feather class="fe-icon" name="smile"></i-feather>
       </button>
-    </div>
 
+      <button class="pointer" (click)="openEmojiDialog()" #tooltip="matTooltip"
+        [matTooltip]="'Add Contributing Guidelines'" [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="git-merge"></i-feather>
+      </button>
+
+      <button class="pointer" (click)="openEmojiDialog()" #tooltip="matTooltip" [matTooltip]="'Add Contributors List'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="users"></i-feather>
+      </button>
+
+      <button class="pointer" (click)="openEmojiDialog()" #tooltip="matTooltip" [matTooltip]="'Add Licence'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="book"></i-feather>
+      </button>
+
+      <button class="pointer" (click)="copyMarkup()" #tooltip="matTooltip" [matTooltip]="'Copy Markdown ⌘+Shift+M'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="copy"></i-feather>
+      </button>
+
+      <button class="pointer" (click)="downloadMarkup()" #tooltip="matTooltip"
+        [matTooltip]="'Download Markdown ⌘+Shift+S'" [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="download"></i-feather>
+      </button>
+
+      <!-- <button class="pointer" (click)="downloadMarkup()" #tooltip="matTooltip" [matTooltip]="'Load Template ⌘+Shift+S'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="package"></i-feather>
+      </button> -->
+      <button class="pointer" (click)="downloadMarkup()" #tooltip="matTooltip" [matTooltip]="'Load Saved Markdown'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="hard-drive"></i-feather>
+      </button>
+
+      <button class="pointer" (click)="saveMarkup()" #tooltip="matTooltip" [matTooltip]="'Save as Template'"
+        [matTooltipPosition]="'below'">
+        <i-feather class="fe-icon" name="save"></i-feather>
+      </button>
+
+
+
+    </div>
     <div class="logo">
       <img src="https://i.imgur.com/AWm93ID.png" /><span class="navbar-brand"></span>
     </div>
 
-    <div class="menu">
+
+    <div class="menu end">
       <a>
-        <ntkme-github-button user="jp1016" repo="markdown" count=true>
+        <ntkme-github-button class="github-star" user="jp1016" repo="markdown" count=true>
         </ntkme-github-button>
       </a>
 
@@ -29,9 +71,10 @@
         <i-feather class="fe-icon" name="sun" *ngIf="isDarkMode"></i-feather>
         <!-- <i-feather class="fe-icon" name="sun"></i-feather> -->
       </a>
+
     </div>
-    <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 
   </div>
+  <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 
 </nav>

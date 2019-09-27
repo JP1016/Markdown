@@ -20,6 +20,15 @@
 .menu {
   display: flex;
   align-items: center;
+  flex: 1;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.github-star {
+  margin-top: -4px;
 }
 
 .menu a {

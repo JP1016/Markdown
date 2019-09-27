@@ -22,6 +22,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { AddEmojiComponent } from './components/add-emoji/add-emoji.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
+import { IndexedDBModule } from "ng-indexed-db";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,12 @@ import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
     MarkdownModule.forRoot(),
     KeyboardShortcutsModule.forRoot(),
     AngularSplitModule.forRoot(),
+    IndexedDBModule.forRoot([
+      {
+        name: 'markdown_db',
+        stores: [{ name: 'markdown_store' }]
+      }
+    ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
   providers: [],

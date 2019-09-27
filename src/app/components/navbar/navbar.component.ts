@@ -5,6 +5,8 @@ import { MarkdownService } from 'src/app/services/markdown.service';
 import { OPTION, TOOLBAR } from 'src/app/constants/app-constants';
 import { AddEmojiComponent } from '../add-emoji/add-emoji.component';
 import { ShortcutInput, AllowIn, ShortcutEventOutput, KeyboardShortcutsComponent } from 'ng-keyboard-shortcuts';
+import { Observable } from 'rxjs';
+import { IndexedDB } from 'ng-indexed-db';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +18,24 @@ export class NavbarComponent implements OnInit {
   public options = OPTION;
   public toolbar = TOOLBAR;
   shortcuts: ShortcutInput[] = [];
+  $list: Observable<any>;
 
   ngOnInit() {
     const theme = localStorage.getItem("theme") || "light-mode";
     this.switchTheme(theme);
   }
 
+  copyMarkup() {
+    this.markDown.copyMarkdown.next(true)
+  }
+
+  downloadMarkup() {
+    this.markDown.downloadMarkdown.next(true)
+  }
+
+  saveMarkup() {
+    this.markDown.saveMarkdown.next(true);
+  }
 
   ngAfterViewInit(): void {
     this.shortcuts.push(
@@ -56,7 +70,7 @@ export class NavbarComponent implements OnInit {
         preventDefault: true
       },
       {
-        key: ["cmd + shift + B"],
+        key: ["cmd + shift + Q"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.BLOCK_QUOTE),
         preventDefault: true
@@ -96,7 +110,7 @@ export class NavbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.hasOwnProperty("success")) {
+      if (result && result.hasOwnProperty("success")) {
         this.markDown.emojiAdded.next(result.data);
       }
     });
@@ -114,7 +128,10 @@ export class NavbarComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2, private dialog: MatDialog,
-    private markDown: MarkdownService) {
+    private markDown: MarkdownService,
+    private indexedDbService: IndexedDB) {
+    this.$list = this.indexedDbService.list('markdown_table');
+
   }
 
 

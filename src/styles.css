@@ -18,6 +18,13 @@ body[class='dark-mode'] {
   --note-sub-text: #718096;
   --modal-bg: #1a202c;
   --split-img: url('/assets/more-vertical.svg');
+
+  --blockquote: #ededed12;
+
+  --table-odd: #090b0f;
+  --table-even: #0f111a;
+  --table-border: #333;
+
 }
 
 body[class='light-mode'] {
@@ -37,7 +44,11 @@ body[class='light-mode'] {
   --note-sub-text: #a0aec0;
   --modal-bg: #3b434f;
   --split-img: url('/assets/more-vertical-light.svg');
+  --blockquote: #edf2f6;
 
+  --table-odd: #F7FAFC;
+  --table-even: #EDF2F7;
+  --table-border: #A0AEC0;
 }
 
 * {
@@ -48,15 +59,15 @@ body[class='light-mode'] {
   background: #79ffe1;
 }
 
+button:focus {
+  outline: 0;
+}
+
 html,
 body {
   font-family: 'Quicksand', sans-serif;
   background: var(--bg);
   color: var(--text);
-}
-
-h2 {
-  font-size: 100px;
 }
 
 .toggle-icon {
@@ -74,7 +85,7 @@ h2 {
 }
 
 .me-editable {
-  height: 100vh;
+  height: 80vh;
   padding: 20px;
   outline: 0 solid transparent;
 }
@@ -136,12 +147,56 @@ h2 {
 blockquote {
   font-size: 1.4em;
   font-style: italic;
-  border-left: 8px solid #78C0A8;
+  border-left: 3px solid #1d88e5;
   line-height: 1.6;
   position: relative;
-  background: #EDEDED;
+  background: var(--blockquote);
+  padding: 1rem;
 }
 
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.17em;
+}
+
+h4 {
+  font-size: 1.12em;
+}
+
+h5 {
+  font-size: .83em;
+}
+
+h6 {
+  font-size: .75em;
+}
+
+table,
+thead tr,
+tbody tr {
+  border: 1px solid var(--table-border);
+}
+
+
+th,
+td {
+  padding: 10px;
+}
+
+tr:nth-of-type(odd) {
+  background-color: var(--table-odd);
+}
+
+tr:nth-of-type(even) {
+  background-color: var(--table-even);
+}
 
 .as-split-gutter-icon {
   background: var(--sidebar);

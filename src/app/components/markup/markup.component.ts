@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { MarkdownService } from 'src/app/services/markdown.service';
-import { TOOLBAR } from 'src/app/constants/app-constants';
+import { TOOLBAR, SAMPLE } from 'src/app/constants/app-constants';
 import { OPTION } from 'src/app/constants/app-constants';
+import { HttpClient } from '@angular/common/http';
+import { IndexedDB } from 'ng-indexed-db';
 
 @Component({
   selector: 'app-markup',
@@ -19,9 +21,68 @@ export class MarkupComponent implements OnInit {
     text: 50,
     markup: 50
   }
-  markdownData = "Markupdata";
+  markdownData = SAMPLE;
 
-  constructor(private dialog: MatDialog, private markDownService: MarkdownService) { }
+  saveMarkup() {
+    this.indexedDbService.create('markdown_store', { title: 'todo name', data: this.markdownData }).subscribe(
+      response => { console.log(response) },
+      error => { console.log(error) }
+    );
+  }
+
+  insertAtCursor(myField, myValue) {
+    //IE support
+    if ((document as any).selection) {
+      myField.focus();
+      let sel = (document as any).selection.createRange();
+      sel.text = myValue;
+    }
+    //MOZILLA and others
+    else if (myField.selectionStart || myField.selectionStart == '0') {
+      var startPos = myField.selectionStart;
+      var endPos = myField.selectionEnd;
+      myField.value = myField.value.substring(0, startPos)
+        + myValue
+        + myField.value.substring(endPos, myField.value.length);
+    } else {
+      myField.value += myValue;
+    }
+  }
+
+  constructor(private snackBar: MatSnackBar,
+    private dialog: MatDialog, private markDownService: MarkdownService, private indexedDbService: IndexedDB) { }
+
+  copyMarkDown() {
+    let selBox = document.createElement("textarea");
+    selBox.style.position = "fixed";
+    selBox.style.left = "0";
+    selBox.style.top = "0";
+    selBox.style.opacity = "0";
+    selBox.value = this.markdownData;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand("copy");
+    document.body.removeChild(selBox);
+
+    this.snackBar.open("Markdown Copied to Clipboard 📋", " ", {
+      duration: 1000
+    });
+  }
+
+  download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
 
 
   replaceSelectedText(startTag, endTag) {
@@ -48,7 +109,6 @@ export class MarkupComponent implements OnInit {
 
   emojiAdded() {
     this.markDownService.emojiAdded.subscribe(emoji => {
-      console.log("Emoji " + emoji);
       this.markdownData += emoji;
     })
   }
@@ -61,10 +121,37 @@ export class MarkupComponent implements OnInit {
     });
   }
 
+  clipboardListener() {
+    this.markDownService.copyMarkdown.subscribe(value => {
+      if (value) {
+        this.copyMarkDown();
+      }
+    });
+  }
+
+
+  downloadListener() {
+    this.markDownService.downloadMarkdown.subscribe(value => {
+      if (value) {
+        this.download("README.md", this.markdownData);
+      }
+    });
+  }
+
+  saveListener() {
+    this.markDownService.saveMarkdown.subscribe(value => {
+      if (value) {
+        this.saveMarkup();
+      }
+    });
+  }
+
   ngOnInit() {
     this.listenToToolbarEvents();
     this.emojiAdded();
-
+    this.clipboardListener();
+    this.downloadListener();
+    this.saveListener();
   }
 
 }

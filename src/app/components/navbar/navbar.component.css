@@ -9,6 +9,14 @@
   display: flex;
 }
 
+.logo span {
+  visibility: hidden;
+}
+
+.logo:hover span {
+  visibility: visible;
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -33,7 +41,7 @@ nav {
 
 .navbar img {
   padding-right: 10px;
-  height: 33px;
+  height: 40px;
 }
 
 .navbar {

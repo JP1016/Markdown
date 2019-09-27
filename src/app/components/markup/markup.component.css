@@ -44,3 +44,16 @@ table {
   border-spacing: 0;
   display: table
 }
+
+
+textarea {
+  background: var(--bg);
+  border: 0px;
+  height: 100%;
+  width: 100%;
+  padding: 25px;
+}
+
+textarea:focus {
+  outline: 0;
+}

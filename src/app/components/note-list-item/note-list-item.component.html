@@ -1,9 +1,0 @@
-<div class="notelist max-w-sm w-full lg:max-w-full lg:flex" *ngFor="let note of formattedNotes" [ngClass]="{'current': currentNoteId && note && note.id==currentNoteId}"
-  style="cursor:pointer" (click)="changeNote(note.id)">
-  <div class="p-3 flex flex-col justify-between leading-normal">
-    <div class="mb-0">
-      <div class="text-sm item">{{ note.firstLine || 'Untitled Note' }}</div>
-      <p class="text-xs desc-data">{{ note.nextLines }}</p>
-    </div>
-  </div>
-</div>

@@ -1,40 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="webkit-box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;">
   <div class="header">
-    <div class="toggle-icon" (click)="toggleSidebar()">
-      <i-feather class="fe-icon" name="menu"></i-feather>
-    </div>
 
-    <div class="logo">
-      <img src="https://i.imgur.com/VT6MYfB.png" /><span class="navbar-brand">Markdown</span>
-    </div>
+
     <div class="menu">
-
-      <button class="pointer" *ngFor="let option of options | keyvalue:sortNull" (click)="formatText(option.value)">
+      <button class="pointer" *ngFor="let option of options | keyvalue:sortNull" (click)="formatText(option.value)"
+        #tooltip="matTooltip" [matTooltip]="toolbar[option.value].text" [matTooltipPosition]="'below'">
         <i-feather class="fe-icon" [name]="option.value"></i-feather>
       </button>
 
-      <button class="pointer" (click)="openEmojiDialog()">
+      <button class="pointer" (click)="openEmojiDialog()" #tooltip="matTooltip" [matTooltip]="'Add Emoji ⌘+Shift+E'"
+        [matTooltipPosition]="'below'">
         <i-feather class="fe-icon" name="smile"></i-feather>
       </button>
-
-
     </div>
+
+    <div class="logo">
+      <img src="https://i.imgur.com/AWm93ID.png" /><span class="navbar-brand"></span>
+    </div>
+
     <div class="menu">
       <a>
-        <ntkme-github-button user="jp1016" repo="paper" count=true>
+        <ntkme-github-button user="jp1016" repo="markdown" count=true>
         </ntkme-github-button>
       </a>
-      <a (click)="readQR()" class="pointer">
-        <i-feather class="fe-icon" name="camera"></i-feather>
-      </a>
-      <a (click)="switchMarkDownMode()" class="pointer">
-        <i-feather class="fe-icon" name="book-open"></i-feather>
-      </a>
+
       <a (click)="toggleMode()" class="pointer">
         <i-feather class="fe-icon" name="moon" *ngIf="!isDarkMode"></i-feather>
         <i-feather class="fe-icon" name="sun" *ngIf="isDarkMode"></i-feather>
         <!-- <i-feather class="fe-icon" name="sun"></i-feather> -->
       </a>
     </div>
+    <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+
   </div>
+
 </nav>

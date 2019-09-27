@@ -14,4 +14,8 @@ export class AddEmojiComponent implements OnInit {
   ngOnInit() {
   }
 
+  addEmoji(event) {
+    console.log(event)
+    this.dialogRef.close({ success: true, data: event.emoji.native });
+  }
 }

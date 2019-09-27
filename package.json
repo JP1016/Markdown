@@ -33,6 +33,7 @@
     "angular-split": "^3.0.2",
     "angularx-qrcode": "^1.6.4",
     "ng-contenteditable": "^2.1.1",
+    "ng-keyboard-shortcuts": "^8.0.0",
     "ngx-markdown": "^8.1.0",
     "nl2br": "0.0.3",
     "prismjs": "^1.17.1",

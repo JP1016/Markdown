@@ -6,14 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MarkdownService {
 
-  public isMarkdownMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public optionChanged: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public emojiAdded: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
   constructor() { }
-
-
-
-  formatMarkdown(option: any) {
-  }
-
 
 }

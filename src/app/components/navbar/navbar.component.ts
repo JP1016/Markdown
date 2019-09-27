@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject, Renderer2 } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { QrReadComponent } from '../qr-read/qr-read.component';
 import { MatDialog } from '@angular/material';
-import { NoteService } from 'src/app/services/note.service';
 import { MarkdownService } from 'src/app/services/markdown.service';
-import { OPTION } from 'src/app/constants/app-constants';
+import { OPTION, TOOLBAR } from 'src/app/constants/app-constants';
 import { AddEmojiComponent } from '../add-emoji/add-emoji.component';
+import { ShortcutInput, AllowIn, ShortcutEventOutput, KeyboardShortcutsComponent } from 'ng-keyboard-shortcuts';
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +14,78 @@ import { AddEmojiComponent } from '../add-emoji/add-emoji.component';
 export class NavbarComponent implements OnInit {
   public isDarkMode = true;
   public options = OPTION;
+  public toolbar = TOOLBAR;
+  shortcuts: ShortcutInput[] = [];
 
   ngOnInit() {
     const theme = localStorage.getItem("theme") || "light-mode";
     this.switchTheme(theme);
+  }
 
+
+  ngAfterViewInit(): void {
+    this.shortcuts.push(
+      {
+        key: ["cmd + shift + b"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.BOLD),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + i"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.ITALIC),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + H"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.SIZE),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + L"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.LIST),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + C"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.CHECK_BOX),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + B"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.BLOCK_QUOTE),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + D"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.CODE),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + T"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.TABLE),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + K"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.LINK),
+        preventDefault: true
+      },
+      {
+        key: ["cmd + shift + G"],
+        allowIn: [AllowIn.Textarea],
+        command: e => this.markDown.optionChanged.next(OPTION.IMAGE),
+        preventDefault: true
+      },
+    );
   }
 
   openEmojiDialog() {
@@ -30,7 +96,8 @@ export class NavbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.success) {
+      if (result.hasOwnProperty("success")) {
+        this.markDown.emojiAdded.next(result.data);
       }
     });
   }
@@ -47,35 +114,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2, private dialog: MatDialog,
-    private noteService: NoteService,
     private markDown: MarkdownService) {
   }
 
-
-  readQR() {
-    const dialogRef = this.dialog.open(QrReadComponent, {
-      data: {
-        text: null
-      }, panelClass: "qr"
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.success) {
-        this.noteService.newNote(result.data);
-      }
-    });
-  }
-
-
-  toggleSidebar() {
-    const isSideBarVisible = this.noteService.isSideBarVisible.getValue();
-    this.noteService.isSideBarVisible.next(!isSideBarVisible);
-  }
-
-  switchMarkDownMode() {
-    const isMarkdownMode = this.markDown.isMarkdownMode.getValue();
-    this.markDown.isMarkdownMode.next(!isMarkdownMode);
-  }
 
   toggleMode() {
     let mode;

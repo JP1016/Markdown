@@ -17,6 +17,7 @@ body[class='dark-mode'] {
   --note-main-text: #e2e8f0;
   --note-sub-text: #718096;
   --modal-bg: #1a202c;
+  --split-img: url('/assets/more-vertical.svg');
 }
 
 body[class='light-mode'] {
@@ -35,6 +36,8 @@ body[class='light-mode'] {
   --note-main-text: #4a5568;
   --note-sub-text: #a0aec0;
   --modal-bg: #3b434f;
+  --split-img: url('/assets/more-vertical-light.svg');
+
 }
 
 * {
@@ -137,4 +140,16 @@ blockquote {
   line-height: 1.6;
   position: relative;
   background: #EDEDED;
+}
+
+
+.as-split-gutter-icon {
+  background: var(--sidebar);
+  background-image: var(--split-img) !important;
+}
+
+
+.emoji-add .mat-dialog-container {
+  padding: 0px !important;
+  background: unset !important;
 }

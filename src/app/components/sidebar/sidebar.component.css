@@ -1,0 +1,28 @@
+.new-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  outline: 0;
+  padding-top: 25px;
+  margin-top: 0;
+  padding-bottom: 22px;
+}
+.fe-icon {
+  color: var(--list-color);
+}
+
+.new-button:hover,
+.new-button:hover .fe-icon {
+  color: var(--text);
+}
+
+.new-button span {
+  padding-right: 12px;
+}
+
+.notes-items {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 85vh;
+}

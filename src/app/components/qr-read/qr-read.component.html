@@ -1,0 +1,7 @@
+<div>
+  <p mat-dialog-title>Read QR<mat-icon (click)="dialogRef.close()" class="right-side pointer">close </mat-icon>
+  </p>
+</div>
+<mat-dialog-content>
+  <zxing-scanner (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
+</mat-dialog-content>

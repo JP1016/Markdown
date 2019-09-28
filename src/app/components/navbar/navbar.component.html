@@ -1,6 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="webkit-box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;">
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="webkit-box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;"
+>
   <div class="header">
-    <div class="logo"><img src="https://i.imgur.com/AWm93ID.png" /><span class="navbar-brand"></span></div>
+    <div class="logo">
+      <img src="https://i.imgur.com/AWm93ID.png" /><span
+        class="navbar-brand"
+      ></span>
+    </div>
 
     <div class="menu">
       <button
@@ -80,7 +87,7 @@
       </button> -->
       <button
         class="pointer"
-        (click)="downloadMarkup()"
+        (click)="loadMarkup()"
         #tooltip="matTooltip"
         [matTooltip]="'Load Saved Markdown'"
         [matTooltipPosition]="'below'"
@@ -101,7 +108,13 @@
 
     <div class="menu end">
       <a>
-        <ntkme-github-button class="github-star" user="jp1016" repo="markdown" count="true"> </ntkme-github-button>
+        <ntkme-github-button
+          class="github-star"
+          user="jp1016"
+          repo="markdown"
+          count="true"
+        >
+        </ntkme-github-button>
       </a>
 
       <a (click)="toggleMode()" class="pointer">

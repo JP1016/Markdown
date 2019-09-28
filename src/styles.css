@@ -157,6 +157,7 @@ blockquote {
   background: var(--blockquote);
   padding: 0.3rem 1rem;
 }
+
 p {
   margin: 15px 0;
 }
@@ -208,16 +209,19 @@ ul {
   list-style-type: disc;
   list-style-position: inside;
 }
+
 ol {
   list-style-type: decimal;
   list-style-position: inside;
 }
+
 ul ul,
 ol ul {
   list-style-type: circle;
   list-style-position: inside;
   margin-left: 15px;
 }
+
 ol ol,
 ul ol {
   list-style-type: lower-latin;
@@ -238,4 +242,13 @@ ul ol {
 .mat-dialog-container {
   color: var(--text);
   min-width: 500px;
+}
+
+
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -55,15 +55,19 @@ export class MarkupComponent implements OnInit {
     });
   }
 
-  saveMarkup() {
+  saveMarkup(fileName) {
     this.indexedDbService
-      .create("markdown_store", { title: "todo name", data: this.markdownData })
+      .create("markdown_store", { title: fileName, data: this.markdownData })
       .subscribe(
         response => {
-          console.log(response);
+          this.snackBar.open("Markdown Saved !! 💾", " ", {
+            duration: 1000
+          });
         },
         error => {
-          console.log(error);
+          this.snackBar.open("Error Occured while saving markdown !! 🛑", " ", {
+            duration: 1000
+          });
         }
       );
   }
@@ -164,7 +168,7 @@ export class MarkupComponent implements OnInit {
   saveListener() {
     this.markDownService.saveMarkdown.subscribe(value => {
       if (value) {
-        this.saveMarkup();
+        this.saveMarkup(this.markDownService.saveMarkdown.getValue());
       }
     });
   }

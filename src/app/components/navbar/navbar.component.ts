@@ -13,6 +13,8 @@ import {
   CONTRIB_LIST,
   LICENCE_SELECT
 } from "src/app/constants/form-constants";
+import { SaveDialogComponent } from "../save-dialog/save-dialog.component";
+import { LoadDialogComponent } from "../load-dialog/load-dialog.component";
 
 @Component({
   selector: "app-navbar",
@@ -54,7 +56,19 @@ export class NavbarComponent implements OnInit {
   }
 
   saveMarkup() {
-    this.markDown.saveMarkdown.next(true);
+    const dialogRef = this.dialog.open(SaveDialogComponent, {
+      data: {
+        text: null
+      }
+    });
+  }
+
+  loadMarkup() {
+    const dialogRef = this.dialog.open(LoadDialogComponent, {
+      data: {
+        text: null
+      }
+    });
   }
 
   ngAfterViewInit(): void {

@@ -1,0 +1,15 @@
+.list-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-items span,
+.list-items .fe-icon {
+  cursor: pointer;
+}
+
+.list-items span:hover,
+.list-items .fe-icon:hover {
+  color: var(--note-sub-text);
+  cursor: pointer;
+}

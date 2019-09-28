@@ -1,16 +1,11 @@
 <h5 mat-dialog-title>
   Load Markdown
-  <button
-    (click)="loadDialog.close()"
-    type="button"
-    class="close close-btn"
-    aria-label="Close"
-  >
+  <button (click)="loadDialog.close()" type="button" class="close close-btn" aria-label="Close">
     <span class="close-icon" aria-hidden="true">&times;</span>
   </button>
 </h5>
 <mat-dialog-content>
-  <div *ngFor="let file of $list | async">
+  <div *ngFor="let file of $list | async" class="list-items">
     <span> {{ file.title }} </span>
     <i-feather class="fe-icon" name="trash-2"></i-feather>
   </div>

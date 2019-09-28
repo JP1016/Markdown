@@ -32,9 +32,13 @@ export class OptionsDialogComponent implements OnInit {
   populateFormControl() {
     this.addOption = this.fb.group({});
     const form = FORM_OPTIONS[this.data.type];
+    let value = "";
+    if (FORM_OPTIONS[this.data.type].hasOwnProperty("default")) {
+      value = FORM_OPTIONS[this.data.type]["default"];
+    }
 
     form.fields.map(column => {
-      this.addOption.addControl(column.name, new FormControl("", []));
+      this.addOption.addControl(column.name, new FormControl(value, []));
     });
   }
 

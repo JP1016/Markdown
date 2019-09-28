@@ -66,6 +66,7 @@ html,
 body {
   font-family: 'Quicksand', sans-serif;
   background: var(--bg);
+  overflow: hidden;
   color: var(--text);
 }
 
@@ -143,14 +144,21 @@ body {
   cursor: pointer;
 }
 
+a {
+  color: #1d88e5;
+}
+
 blockquote {
-  font-size: 1.4em;
+  font-size: 14px;
   font-style: italic;
   border-left: 3px solid #1d88e5;
   line-height: 1.6;
   position: relative;
   background: var(--blockquote);
-  padding: 1rem;
+  padding: 0.3rem 1rem;
+}
+p {
+  margin: 15px 0;
 }
 
 h1 {

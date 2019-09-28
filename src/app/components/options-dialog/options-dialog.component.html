@@ -1,19 +1,11 @@
 <h5 mat-dialog-title>
   {{ formOption.title }}
-  <button
-    (click)="optionsDialog.close()"
-    type="button"
-    class="close close-btn"
-    aria-label="Close"
-  >
-    <span aria-hidden="true">&times;</span>
+  <button (click)="optionsDialog.close()" type="button" class="close close-btn" aria-label="Close">
+    <span class="close-icon" aria-hidden="true">&times;</span>
   </button>
 </h5>
 <mat-dialog-content>
-  <div
-    *ngFor="let item of formOption.fields; let i = index"
-    [formGroup]="addOption"
-  >
+  <div *ngFor="let item of formOption.fields; let i = index" [formGroup]="addOption">
     <span>{{ item.label }}</span>
     <div>
       <input
@@ -29,9 +21,8 @@
         value=""
         *ngIf="!(data.type == 'image' || data.type == 'link')"
       ></textarea>
-      <span *ngIf="!(data.type == 'image' || data.type == 'link')"
-        >*You can replace the above text with your own and reuse it while
-        creating next readme
+      <span class="help-block" *ngIf="!(data.type == 'image' || data.type == 'link')"
+        >* You can replace the above text with your own and reuse it while creating next readme
       </span>
     </div>
   </div>

@@ -9,8 +9,26 @@ textarea {
   resize: none;
 }
 
+input[type='text'] {
+  background: var(--bg);
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
 textarea:focus {
   outline: 0;
+}
+
+.close-icon {
+  font-size: 30px;
+}
+
+.help-block {
+  font-size: 14px;
+  color: var(--list-color);
 }
 
 .mat-dialog-actions {
@@ -19,7 +37,7 @@ textarea:focus {
 }
 
 .mat-dialog-actions button {
-  padding: 10px;
+  padding: 5px 11px;
   background: #1d88e5;
   border-radius: 4px;
   font-size: 14px;

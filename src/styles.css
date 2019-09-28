@@ -24,7 +24,6 @@ body[class='dark-mode'] {
   --table-odd: #090b0f;
   --table-even: #0f111a;
   --table-border: #333;
-
 }
 
 body[class='light-mode'] {
@@ -46,9 +45,9 @@ body[class='light-mode'] {
   --split-img: url('/assets/more-vertical-light.svg');
   --blockquote: #edf2f6;
 
-  --table-odd: #F7FAFC;
-  --table-even: #EDF2F7;
-  --table-border: #A0AEC0;
+  --table-odd: #f7fafc;
+  --table-even: #edf2f7;
+  --table-border: #a0aec0;
 }
 
 * {
@@ -171,11 +170,11 @@ h4 {
 }
 
 h5 {
-  font-size: .83em;
+  font-size: 0.83em;
 }
 
 h6 {
-  font-size: .75em;
+  font-size: 0.75em;
 }
 
 table,
@@ -183,7 +182,6 @@ thead tr,
 tbody tr {
   border: 1px solid var(--table-border);
 }
-
 
 th,
 td {
@@ -198,13 +196,38 @@ tr:nth-of-type(even) {
   background-color: var(--table-even);
 }
 
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+ul ul,
+ol ul {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-left: 15px;
+}
+ol ol,
+ul ol {
+  list-style-type: lower-latin;
+  list-style-position: inside;
+  margin-left: 15px;
+}
+
 .as-split-gutter-icon {
   background: var(--sidebar);
   background-image: var(--split-img) !important;
 }
 
-
 .emoji-add .mat-dialog-container {
   padding: 0px !important;
   background: unset !important;
+}
+
+.mat-dialog-container {
+  color: var(--text);
+  min-width: 500px;
 }

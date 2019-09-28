@@ -1,0 +1,26 @@
+textarea {
+  background: var(--bg);
+  border: 0px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 18px;
+  resize: none;
+}
+
+textarea:focus {
+  outline: 0;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+  margin-bottom: -6px;
+}
+
+.mat-dialog-actions button {
+  padding: 10px;
+  background: #1d88e5;
+  border-radius: 4px;
+  font-size: 14px;
+}

@@ -24,8 +24,6 @@ export class OptionsDialogComponent implements OnInit {
 
   ngOnInit() {
     this.formOption = FORM_OPTIONS[this.data.type];
-    console.log("TYPE");
-    console.log(this.data.type);
     this.populateFormControl();
   }
 
@@ -43,9 +41,6 @@ export class OptionsDialogComponent implements OnInit {
   }
 
   executeFormAction() {
-    console.log(this.addOption.value);
-    console.log(this.data);
-    console.log(this.data.type);
     if (this.data.type == "image") {
       this.optionsDialog.close({
         success: true,
@@ -57,5 +52,9 @@ export class OptionsDialogComponent implements OnInit {
         data: { type: "link", ...this.addOption.value }
       });
     }
+    this.optionsDialog.close({
+      success: true,
+      data: { type: "text", ...this.addOption.value }
+    });
   }
 }

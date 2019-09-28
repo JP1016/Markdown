@@ -64,11 +64,36 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
 <table>
-  <tr>
-    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#question-kentcdodds" title="Answering Questions">💬</a> <a href="https://github.com/all-contributors/all-contributors/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#talk-kentcdodds" title="Talks">📢</a></td>
-    <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels"/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a> <a href="#review-jfmengels" title="Reviewed Pull Requests">👀</a> <a href="#tool-jfmengels" title="Tools">🔧</a></td>
-  <tr>
-</table>
+	<tr>
+		<td align="center">
+			<a href="https://kentcdodds.com">
+				<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds" />
+				<br />
+				<sub>
+					<b>Kent C. Dodds</b>
+				</sub>
+			</a>
+			<br />
+			<a href="#question-kentcdodds" title="Answering Questions">💬</a>
+			<a href="https://github.com/all-contributors/all-contributors/commits?author=kentcdodds" title="Documentation">📖</a>
+			<a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a>
+			<a href="#talk-kentcdodds" title="Talks">📢</a>
+		</td>
+		<td align="center">
+			<a href="https://github.com/jfmengels">
+				<img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels" />
+				<br />
+				<sub>
+					<b>Jeroen Engels</b>
+				</sub>
+			</a>
+			<br />
+			<a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a>
+			<a href="#review-jfmengels" title="Reviewed Pull Requests">👀</a>
+			<a href="#tool-jfmengels" title="Tools">🔧</a>
+		</td>
+		<tr>
+		</table>
     `
   },
   [LICENCE_SELECT]: {

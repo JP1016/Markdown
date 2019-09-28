@@ -163,8 +163,17 @@ export class NavbarComponent implements OnInit {
           type: option
         }
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result && result.hasOwnProperty("success")) {
+          console.log("Success");
+          console.log(result);
+          this.markDown.metaAdded.next(result.data);
+        }
+      });
+    } else {
+      this.markDown.optionChanged.next(option);
     }
-    this.markDown.optionChanged.next(option);
   }
 
   toggleMode() {

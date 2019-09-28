@@ -505,3 +505,7 @@ mat-dialog-container {
   padding: 0px !important;
 
 }
+
+.warning {
+  padding-top: 3px;
+}

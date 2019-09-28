@@ -87,6 +87,15 @@
       </button> -->
       <button
         class="pointer"
+        (click)="newFile()"
+        #tooltip="matTooltip"
+        [matTooltip]="'New Markdown'"
+        [matTooltipPosition]="'below'"
+      >
+        <i-feather class="fe-icon" name="loader"></i-feather>
+      </button>
+      <button
+        class="pointer"
         (click)="loadMarkup()"
         #tooltip="matTooltip"
         [matTooltip]="'Load Saved Markdown'"
@@ -107,6 +116,17 @@
     </div>
 
     <div class="menu end">
+      <span
+        *ngIf="!fileName"
+        #tooltip="matTooltip"
+        [matTooltip]="'Unsaved File, Click on save icon to save markdown.'"
+        [matTooltipPosition]="'below'"
+      >
+        <i-feather class="fe-icon warning" name="alert-circle"></i-feather>
+        {{ fileName ? fileName : "Untitled" }}</span
+      >
+      <span *ngIf="fileName">{{ fileName }}</span>
+
       <a>
         <ntkme-github-button
           class="github-star"

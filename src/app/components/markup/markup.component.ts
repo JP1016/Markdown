@@ -24,24 +24,24 @@ export class MarkupComponent implements OnInit {
   };
   markdownData = SAMPLE;
   currentMarkdown = null;
-  currentTitle = null;
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private markDownService: MarkdownService,
     private indexedDbService: IndexedDB
-  ) {}
+  ) { }
 
   saveFile() {
     interval(200).subscribe(_ => {
       if (this.currentMarkdown) {
+        localStorage.setItem("recentItem", this.currentMarkdown.id);
         this.indexedDbService
           .update("markdown_store", {
-            title: this.currentTitle,
-            id: this.currentMarkdown,
+            title: this.currentMarkdown.title,
+            id: this.currentMarkdown.id,
             data: this.markdownData
           })
-          .subscribe(response => {}, error => {});
+          .subscribe(response => { }, error => { });
       } else {
         localStorage.setItem("tempMarkdown", this.markdownData);
       }
@@ -49,7 +49,19 @@ export class MarkupComponent implements OnInit {
   }
 
   loadRecent() {
-    this.markdownData = localStorage.getItem("tempMarkdown") || "";
+    const id = localStorage.getItem("recentItem");
+    if (id) {
+      this.indexedDbService.list("markdown_store").subscribe(res => {
+        for (const markdown of res) {
+          if (markdown.id == id) {
+            this.currentMarkdown = markdown;
+            this.markDownService.markdownFromLocalStorage.next(markdown);
+          }
+        }
+      });
+    } else {
+      this.markdownData = localStorage.getItem("tempMarkdown") || "";
+    }
   }
 
   ngOnInit() {
@@ -60,16 +72,27 @@ export class MarkupComponent implements OnInit {
     this.saveListener();
     this.metaListener();
     this.loadMarkdownListener();
-    this.loadRecent();
+    this.newMarkdownListener();
     this.saveFile();
+    this.loadRecent();
+  }
+
+  newMarkdownListener() {
+    this.markDownService.newMarkdown.subscribe(newFile => {
+      if (newFile) {
+        localStorage.removeItem("recentItem");
+        this.currentMarkdown = null;
+        this.markdownData = "";
+
+      }
+    });
   }
 
   loadMarkdownListener() {
     this.markDownService.loadMarkdown.subscribe(markdown => {
       if (markdown) {
         this.markdownData = markdown.data;
-        this.currentMarkdown = markdown.id;
-        this.currentTitle = markdown.title;
+        this.currentMarkdown = markdown;
       }
     });
   }
@@ -222,11 +245,11 @@ export class MarkupComponent implements OnInit {
       var strPos = 0;
       var br =
         (txtarea as any).selectionStart ||
-        (txtarea as any).selectionStart == "0"
+          (txtarea as any).selectionStart == "0"
           ? "ff"
           : (document as any).selection
-          ? "ie"
-          : false;
+            ? "ie"
+            : false;
       if (br == "ie") {
         txtarea.focus();
         var range = (document as any).selection.createRange();

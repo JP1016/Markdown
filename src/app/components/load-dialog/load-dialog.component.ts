@@ -43,7 +43,7 @@ export class LoadDialogComponent implements OnInit {
 
   loadMarkdown(item) {
     this.markDownService.loadMarkdown.next(item);
-    this.loadDialog.close();
+    this.loadDialog.close({ data: item });
   }
 
   ngOnInit() {

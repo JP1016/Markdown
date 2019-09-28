@@ -28,6 +28,12 @@ export class MarkdownService {
   public loadMarkdown: BehaviorSubject<MarkDownObject> = new BehaviorSubject<
     MarkDownObject
   >(null);
+  public newMarkdown: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    null
+  );
+  public markdownFromLocalStorage: BehaviorSubject<MarkDownObject> = new BehaviorSubject<MarkDownObject>(
+    null
+  );
 
   constructor() {}
 }

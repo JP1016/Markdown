@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   public isDarkMode = true;
   public options = OPTION;
   public toolbar = TOOLBAR;
+  public fileName;
   shortcuts: ShortcutInput[] = [];
   $list: Observable<any>;
 
@@ -45,14 +46,26 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     const theme = localStorage.getItem("theme") || "light-mode";
     this.switchTheme(theme);
+    this.loadedMarkupFromLocalStorage();
   }
 
+  loadedMarkupFromLocalStorage() {
+    this.markDown.markdownFromLocalStorage.subscribe(markdown => {
+      if (markdown) {
+        this.fileName = markdown.title;
+      }
+    })
+  }
   copyMarkup() {
     this.markDown.copyMarkdown.next(true);
   }
 
   downloadMarkup() {
     this.markDown.downloadMarkdown.next(true);
+  }
+
+  newFile() {
+    this.markDown.newMarkdown.next(true);
   }
 
   saveMarkup() {
@@ -67,6 +80,11 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadDialogComponent, {
       data: {
         text: null
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.hasOwnProperty("data")) {
+        this.fileName = result.data.title;
       }
     });
   }
@@ -152,7 +170,7 @@ export class NavbarComponent implements OnInit {
   }
 
   //Hack to prevent default angular sorting
-  sortNull() {}
+  sortNull() { }
 
   formatText(option) {
     console.log(option);

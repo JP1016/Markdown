@@ -6,6 +6,7 @@ import {
   Heart,
   Github,
   Trash2,
+  AlertCircle,
   Send,
   Moon,
   Sun,
@@ -32,6 +33,7 @@ import {
   Copy,
   Download,
   Package,
+  Loader,
   Save,
   GitMerge,
   Users
@@ -44,6 +46,7 @@ const icons = {
   Trash2,
   Send,
   Moon,
+  Loader,
   Sun,
   Plus,
   Menu,
@@ -70,6 +73,7 @@ const icons = {
   ChevronsRight,
   Columns,
   GitMerge,
+  AlertCircle,
   Users
 };
 

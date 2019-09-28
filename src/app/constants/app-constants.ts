@@ -13,6 +13,7 @@ export const OPTION = Object.freeze({
   LINK: "link",
   IMAGE: "image"
 })
+const END_QUOTES = "```"
 
 export const TOOLBAR = Object.freeze({
   [OPTION.BOLD]: {
@@ -48,8 +49,10 @@ export const TOOLBAR = Object.freeze({
   },
   [OPTION.CODE]: {
     text: "Code ⌘+Shift+D",
-    startTag: "```javascript ",
-    endTag: "```"
+    startTag: '```javascript ',
+    endTag: `
+
+   ${END_QUOTES}`
   },
   [OPTION.TABLE]: {
     text: "Table ⌘+Shift+T",

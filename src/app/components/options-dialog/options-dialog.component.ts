@@ -51,10 +51,11 @@ export class OptionsDialogComponent implements OnInit {
         success: true,
         data: { type: "link", ...this.addOption.value }
       });
+    } else {
+      this.optionsDialog.close({
+        success: true,
+        data: { type: "text", ...this.addOption.value }
+      });
     }
-    this.optionsDialog.close({
-      success: true,
-      data: { type: "text", ...this.addOption.value }
-    });
   }
 }

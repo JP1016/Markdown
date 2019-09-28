@@ -41,6 +41,8 @@ export class MarkupComponent implements OnInit {
   metaListener() {
     this.markDownService.metaAdded.subscribe(val => {
       if (val && val.hasOwnProperty("type") && val.type != "text") {
+        console.log("listener");
+        console.log(val);
         const imageDiv =
           TOOLBAR[val.type].startTag.replace(
             "enter description here",
@@ -174,48 +176,51 @@ export class MarkupComponent implements OnInit {
   }
 
   insertAtCaret(text) {
-    var txtarea = document.getElementById("mArea");
-    if (!txtarea) {
-      return;
-    }
+    if (text) {
+      var txtarea = document.getElementById("mArea");
+      if (!txtarea) {
+        return;
+      }
 
-    var scrollPos = txtarea.scrollTop;
-    var strPos = 0;
-    var br =
-      (txtarea as any).selectionStart || (txtarea as any).selectionStart == "0"
-        ? "ff"
-        : (document as any).selection
-        ? "ie"
-        : false;
-    if (br == "ie") {
-      txtarea.focus();
-      var range = (document as any).selection.createRange();
-      range.moveStart("character", -(txtarea as any).value.length);
-      strPos = range.text.length;
-    } else if (br == "ff") {
-      strPos = (txtarea as any).selectionStart;
-    }
+      var scrollPos = txtarea.scrollTop;
+      var strPos = 0;
+      var br =
+        (txtarea as any).selectionStart ||
+        (txtarea as any).selectionStart == "0"
+          ? "ff"
+          : (document as any).selection
+          ? "ie"
+          : false;
+      if (br == "ie") {
+        txtarea.focus();
+        var range = (document as any).selection.createRange();
+        range.moveStart("character", -(txtarea as any).value.length);
+        strPos = range.text.length;
+      } else if (br == "ff") {
+        strPos = (txtarea as any).selectionStart;
+      }
 
-    var front = (txtarea as any).value.substring(0, strPos);
-    var back = (txtarea as any).value.substring(
-      strPos,
-      (txtarea as any).value.length
-    );
-    (txtarea as any).value = front + text + back;
-    strPos = strPos + text.length;
-    if (br == "ie") {
-      txtarea.focus();
-      var ieRange = (document as any).selection.createRange();
-      ieRange.moveStart("character", -(txtarea as any).value.length);
-      ieRange.moveStart("character", strPos);
-      ieRange.moveEnd("character", 0);
-      ieRange.select();
-    } else if (br == "ff") {
-      (txtarea as any).selectionStart = strPos;
-      (txtarea as any).selectionEnd = strPos;
-      txtarea.focus();
-    }
+      var front = (txtarea as any).value.substring(0, strPos);
+      var back = (txtarea as any).value.substring(
+        strPos,
+        (txtarea as any).value.length
+      );
+      (txtarea as any).value = front + text + back;
+      strPos = strPos + text.length;
+      if (br == "ie") {
+        txtarea.focus();
+        var ieRange = (document as any).selection.createRange();
+        ieRange.moveStart("character", -(txtarea as any).value.length);
+        ieRange.moveStart("character", strPos);
+        ieRange.moveEnd("character", 0);
+        ieRange.select();
+      } else if (br == "ff") {
+        (txtarea as any).selectionStart = strPos;
+        (txtarea as any).selectionEnd = strPos;
+        txtarea.focus();
+      }
 
-    txtarea.scrollTop = scrollPos;
+      txtarea.scrollTop = scrollPos;
+    }
   }
 }

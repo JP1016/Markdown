@@ -165,13 +165,12 @@ export class NavbarComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
         if (result && result.hasOwnProperty("success")) {
           this.markDown.metaAdded.next(result.data);
         }
       });
-    }
-
-    if (Object.values(OPTION).indexOf(option) == -1) {
+    } else if (Object.values(OPTION).indexOf(option) == -1) {
       const dialogRef = this.dialog.open(OptionsDialogComponent, {
         data: {
           type: option
@@ -186,6 +185,7 @@ export class NavbarComponent implements OnInit {
         }
       });
     } else {
+      console.log("should not");
       this.markDown.optionChanged.next(option);
     }
   }

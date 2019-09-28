@@ -1,6 +1,10 @@
 .list-items {
   display: flex;
   justify-content: space-between;
+  padding: 8px 0;
+  justify-content: space-between;
+  font-size: 19px;
+
 }
 
 .list-items span,

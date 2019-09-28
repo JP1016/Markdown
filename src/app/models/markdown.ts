@@ -1,6 +1,6 @@
 export interface MarkDownObject {
   id: string;
   title: string;
-  text: string;
+  data: string;
   timestamp?: string;
 }

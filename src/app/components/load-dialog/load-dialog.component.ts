@@ -15,10 +15,38 @@ export class LoadDialogComponent implements OnInit {
   constructor(
     public loadDialog: MatDialogRef<LoadDialogComponent>,
     private markDownService: MarkdownService,
-    private indexedDbService: IndexedDB
+    private indexedDbService: IndexedDB,
+    private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {
+  deleteMarkdown(id) {
+    console.log(id);
+    this.indexedDbService.delete("markdown_store", id).subscribe(
+      response => {
+        this.getMarkdowns();
+        this.snackBar.open("Markdown Deleted !! 🗑", " ", {
+          duration: 1000
+        });
+        console.log("Deleted");
+      },
+      error => {
+        this.snackBar.open("Error Occured while deleting markdown !!", " ", {
+          duration: 1000
+        });
+      }
+    );
+  }
+
+  getMarkdowns() {
     this.$list = this.indexedDbService.list("markdown_store");
+  }
+
+  loadMarkdown(item) {
+    this.markDownService.loadMarkdown.next(item);
+    this.loadDialog.close();
+  }
+
+  ngOnInit() {
+    this.getMarkdowns();
   }
 }

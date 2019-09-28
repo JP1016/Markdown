@@ -6,6 +6,7 @@ import { TOOLBAR, SAMPLE } from "src/app/constants/app-constants";
 import { OPTION } from "src/app/constants/app-constants";
 import { HttpClient } from "@angular/common/http";
 import { IndexedDB } from "ng-indexed-db";
+import { interval } from "rxjs";
 
 @Component({
   selector: "app-markup",
@@ -22,12 +23,34 @@ export class MarkupComponent implements OnInit {
     markup: 50
   };
   markdownData = SAMPLE;
+  currentMarkdown = null;
+  currentTitle = null;
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private markDownService: MarkdownService,
     private indexedDbService: IndexedDB
   ) {}
+
+  saveFile() {
+    interval(200).subscribe(_ => {
+      if (this.currentMarkdown) {
+        this.indexedDbService
+          .update("markdown_store", {
+            title: this.currentTitle,
+            id: this.currentMarkdown,
+            data: this.markdownData
+          })
+          .subscribe(response => {}, error => {});
+      } else {
+        localStorage.setItem("tempMarkdown", this.markdownData);
+      }
+    });
+  }
+
+  loadRecent() {
+    this.markdownData = localStorage.getItem("tempMarkdown") || "";
+  }
 
   ngOnInit() {
     this.listenToToolbarEvents();
@@ -36,6 +59,19 @@ export class MarkupComponent implements OnInit {
     this.downloadListener();
     this.saveListener();
     this.metaListener();
+    this.loadMarkdownListener();
+    this.loadRecent();
+    this.saveFile();
+  }
+
+  loadMarkdownListener() {
+    this.markDownService.loadMarkdown.subscribe(markdown => {
+      if (markdown) {
+        this.markdownData = markdown.data;
+        this.currentMarkdown = markdown.id;
+        this.currentTitle = markdown.title;
+      }
+    });
   }
 
   metaListener() {

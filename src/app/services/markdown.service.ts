@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { MetaObject } from "../models/metadata";
+import { MarkDownObject } from "../models/markdown";
 
 @Injectable({
   providedIn: "root"
@@ -23,6 +24,9 @@ export class MarkdownService {
   );
   public metaAdded: BehaviorSubject<MetaObject> = new BehaviorSubject<
     MetaObject
+  >(null);
+  public loadMarkdown: BehaviorSubject<MarkDownObject> = new BehaviorSubject<
+    MarkDownObject
   >(null);
 
   constructor() {}

@@ -53,7 +53,7 @@ import { LoadDialogComponent } from "./components/load-dialog/load-dialog.compon
     IndexedDBModule.forRoot([
       {
         name: "markdown_db",
-        stores: [{ name: "markdown_store" }, { name: "options_store" }]
+        stores: [{ name: "markdown_store" }]
       }
     ]),
     ServiceWorkerModule.register("ngsw-worker.js", {

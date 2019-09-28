@@ -1,18 +1,23 @@
-import { Component, OnInit, Inject, Renderer2, ViewChild } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { MatDialog } from '@angular/material';
-import { MarkdownService } from 'src/app/services/markdown.service';
-import { OPTION, TOOLBAR } from 'src/app/constants/app-constants';
-import { AddEmojiComponent } from '../add-emoji/add-emoji.component';
-import { ShortcutInput, AllowIn } from 'ng-keyboard-shortcuts';
-import { Observable } from 'rxjs';
-import { IndexedDB } from 'ng-indexed-db';
-import { OptionsDialogComponent } from '../options-dialog/options-dialog.component';
+import { Component, OnInit, Inject, Renderer2, ViewChild } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { MatDialog } from "@angular/material";
+import { MarkdownService } from "src/app/services/markdown.service";
+import { OPTION, TOOLBAR } from "src/app/constants/app-constants";
+import { AddEmojiComponent } from "../add-emoji/add-emoji.component";
+import { ShortcutInput, AllowIn } from "ng-keyboard-shortcuts";
+import { Observable } from "rxjs";
+import { IndexedDB } from "ng-indexed-db";
+import { OptionsDialogComponent } from "../options-dialog/options-dialog.component";
+import {
+  CONTRIB_GUIDELINES_SELECT,
+  CONTRIB_LIST,
+  LICENCE_SELECT
+} from "src/app/constants/form-constants";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
   public isDarkMode = true;
@@ -21,17 +26,31 @@ export class NavbarComponent implements OnInit {
   shortcuts: ShortcutInput[] = [];
   $list: Observable<any>;
 
+  public CONTRIB_GUIDELINES_SELECT = CONTRIB_GUIDELINES_SELECT;
+  public CONTRIB_LIST = CONTRIB_LIST;
+  public LICENCE_SELECT = LICENCE_SELECT;
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+    private dialog: MatDialog,
+    private markDown: MarkdownService,
+    private indexedDbService: IndexedDB
+  ) {
+    this.$list = this.indexedDbService.list("markdown_table");
+  }
+
   ngOnInit() {
     const theme = localStorage.getItem("theme") || "light-mode";
     this.switchTheme(theme);
   }
 
   copyMarkup() {
-    this.markDown.copyMarkdown.next(true)
+    this.markDown.copyMarkdown.next(true);
   }
 
   downloadMarkup() {
-    this.markDown.downloadMarkdown.next(true)
+    this.markDown.downloadMarkdown.next(true);
   }
 
   saveMarkup() {
@@ -99,7 +118,7 @@ export class NavbarComponent implements OnInit {
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.IMAGE),
         preventDefault: true
-      },
+      }
     );
   }
 
@@ -107,7 +126,8 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEmojiComponent, {
       data: {
         text: null
-      }, panelClass: "emoji-add"
+      },
+      panelClass: "emoji-add"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,12 +137,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
   //Hack to prevent default angular sorting
-  sortNull() { }
+  sortNull() {}
 
   formatText(option) {
-    console.log(option)
+    console.log(option);
+
     if (option == OPTION.IMAGE || option == OPTION.LINK) {
       const dialogRef = this.dialog.open(OptionsDialogComponent, {
         data: {
@@ -132,26 +152,20 @@ export class NavbarComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result && result.hasOwnProperty("success")) {
-
           this.markDown.metaAdded.next(result.data);
         }
       });
     }
 
-    else {
-      this.markDown.optionChanged.next(option);
+    if (Object.values(OPTION).indexOf(option) == -1) {
+      const dialogRef = this.dialog.open(OptionsDialogComponent, {
+        data: {
+          type: option
+        }
+      });
     }
+    this.markDown.optionChanged.next(option);
   }
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2, private dialog: MatDialog,
-    private markDown: MarkdownService,
-    private indexedDbService: IndexedDB) {
-    this.$list = this.indexedDbService.list('markdown_table');
-
-  }
-
 
   toggleMode() {
     let mode;

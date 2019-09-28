@@ -1,10 +1,12 @@
-const IMAGE_SELECT = "image";
-const LINK_SELECT = "link";
-const CONTRIB_GUIDELINES_SELECT = "cguide";
-const CONTRIB_LIST = "clist";
-const LICENCE_SELECT = "licence";
-const SAVE_TEMPLATE = "save";
-const LOAD_TEMPLATE = "load";
+import { CONTRIBUTION_GUIDE } from "./app-constants";
+
+export const IMAGE_SELECT = "image";
+export const LINK_SELECT = "link";
+export const CONTRIB_GUIDELINES_SELECT = "cguide";
+export const CONTRIB_LIST = "clist";
+export const LICENCE_SELECT = "licence";
+export const SAVE_TEMPLATE = "save";
+export const LOAD_TEMPLATE = "load";
 
 export const FORM_OPTIONS = {
   [IMAGE_SELECT]: {
@@ -17,7 +19,8 @@ export const FORM_OPTIONS = {
       {
         label: "Enter Image Description",
         name: "description"
-      }],
+      }
+    ]
   },
   [LINK_SELECT]: {
     title: "Insert Link",
@@ -29,7 +32,34 @@ export const FORM_OPTIONS = {
       {
         label: "Enter Description",
         name: "description"
-      }],
+      }
+    ]
+  },
+  [CONTRIB_GUIDELINES_SELECT]: {
+    title: "Add Contribution Guideline",
+    fields: [
+      {
+        label: "Enter Contibution Guideline",
+        name: "descr"
+      }
+    ]
+  },
+  [CONTRIB_LIST]: {
+    title: "Add Contribution List",
+    fields: [
+      {
+        label: "Enter Contibution List",
+        name: "descr"
+      }
+    ]
+  },
+  [LICENCE_SELECT]: {
+    title: "Enter licence information",
+    fields: [
+      {
+        label: "Enter licence information",
+        name: "descr"
+      }
+    ]
   }
-
-}
+};

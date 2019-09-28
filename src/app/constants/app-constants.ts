@@ -1,5 +1,4 @@
-const LINK_DESC = 'enter link description here';
-const IMG_DESC = 'enter image description here';
+const DESC = 'enter description here';
 
 export const OPTION = Object.freeze({
   BOLD: "bold",
@@ -61,12 +60,12 @@ export const TOOLBAR = Object.freeze({
   },
   [OPTION.LINK]: {
     text: "Link ⌘+Shift+K",
-    startTag: `[${LINK_DESC}](`,
+    startTag: `[${DESC}](`,
     endTag: ")"
   },
   [OPTION.IMAGE]: {
     text: "Image ⌘+Shift+G",
-    startTag: `![${IMG_DESC}](`,
+    startTag: `![${DESC}](`,
     endTag: ")"
   }
 });

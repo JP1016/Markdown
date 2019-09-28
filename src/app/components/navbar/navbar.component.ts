@@ -4,9 +4,10 @@ import { MatDialog } from '@angular/material';
 import { MarkdownService } from 'src/app/services/markdown.service';
 import { OPTION, TOOLBAR } from 'src/app/constants/app-constants';
 import { AddEmojiComponent } from '../add-emoji/add-emoji.component';
-import { ShortcutInput, AllowIn, ShortcutEventOutput, KeyboardShortcutsComponent } from 'ng-keyboard-shortcuts';
+import { ShortcutInput, AllowIn } from 'ng-keyboard-shortcuts';
 import { Observable } from 'rxjs';
 import { IndexedDB } from 'ng-indexed-db';
+import { OptionsDialogComponent } from '../options-dialog/options-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -122,7 +123,24 @@ export class NavbarComponent implements OnInit {
 
   formatText(option) {
     console.log(option)
-    this.markDown.optionChanged.next(option);
+    if (option == OPTION.IMAGE || option == OPTION.LINK) {
+      const dialogRef = this.dialog.open(OptionsDialogComponent, {
+        data: {
+          type: option
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result && result.hasOwnProperty("success")) {
+
+          this.markDown.metaAdded.next(result.data);
+        }
+      });
+    }
+
+    else {
+      this.markDown.optionChanged.next(option);
+    }
   }
 
   constructor(

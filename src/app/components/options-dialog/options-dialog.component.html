@@ -1,0 +1,17 @@
+<h5 mat-dialog-title>
+  {{formOption.title}}
+  <button (click)="optionsDialog.close()" type="button" class="close close-btn" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</h5>
+<mat-dialog-content>
+  <div *ngFor="let item of formOption.fields; let i = index" [formGroup]="addOption">
+    <span>{{item.label}}</span>
+    <div>
+      <input type="text" class="input-field" [formControlName]="item.name" value="" />
+    </div>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="executeFormAction()" cdkFocusInitial>Ok</button>
+</div>

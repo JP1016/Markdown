@@ -244,11 +244,20 @@ ul ol {
   min-width: 500px;
 }
 
-
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+button:disabled {
+  background: #494949 !important;
+  color: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.close-icon {
+  font-size: 30px;
 }

@@ -22,10 +22,6 @@ textarea:focus {
   outline: 0;
 }
 
-.close-icon {
-  font-size: 30px;
-}
-
 .help-block {
   font-size: 14px;
   color: var(--list-color);

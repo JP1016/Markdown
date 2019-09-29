@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatSnackBar } from "@angular/material";
 import { MarkdownService } from "src/app/services/markdown.service";
@@ -25,11 +25,20 @@ export class MarkupComponent implements OnInit {
   markdownData = SAMPLE;
   currentMarkdown = null;
   constructor(
+    private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private markDownService: MarkdownService,
     private indexedDbService: IndexedDB
   ) { }
+
+  textAreaEmpty() {
+    if (this.markdownData.length == 0) {
+      console.log("triggering")
+      this.insertAtCaret(" ")
+      this.cd.detectChanges();
+    }
+  }
 
   saveFile() {
     interval(200).subscribe(_ => {
@@ -189,6 +198,7 @@ export class MarkupComponent implements OnInit {
       range = (document as any).selection.createRange();
       range.text = startTag;
     }
+    this.cd.detectChanges();
   }
 
   emojiAdded() {
@@ -280,6 +290,7 @@ export class MarkupComponent implements OnInit {
       }
 
       txtarea.scrollTop = scrollPos;
+      this.cd.detectChanges();
     }
   }
 }

@@ -20,12 +20,12 @@ export class SaveDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public saveDialog: MatDialogRef<OptionsDialogComponent>,
     private markdownService: MarkdownService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   saveFile() {
     this.markdownService.saveMarkdown.next(this.fileName);
-    this.saveDialog.close();
+    this.saveDialog.close({ data: this.fileName });
   }
 }

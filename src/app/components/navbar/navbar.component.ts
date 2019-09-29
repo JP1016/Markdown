@@ -65,6 +65,7 @@ export class NavbarComponent implements OnInit {
   }
 
   newFile() {
+    this.fileName = null;
     this.markDown.newMarkdown.next(true);
   }
 
@@ -74,6 +75,13 @@ export class NavbarComponent implements OnInit {
         text: null
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.hasOwnProperty("data")) {
+        this.fileName = result.data;
+      }
+    });
+
   }
 
   loadMarkup() {

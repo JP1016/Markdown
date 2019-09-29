@@ -242,6 +242,7 @@ ul ol {
 .mat-dialog-container {
   color: var(--text);
   min-width: 500px;
+  background: var(--bg);
 }
 
 *.unselectable {

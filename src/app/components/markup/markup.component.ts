@@ -25,18 +25,34 @@ export class MarkupComponent implements OnInit {
   markdownData = SAMPLE;
   currentMarkdown = null;
   constructor(
-    private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private markDownService: MarkdownService,
     private indexedDbService: IndexedDB
   ) { }
 
+  //Hack to change markdown on empty/dynamic insertion
+  triggerMarkdownChange() {
+    setTimeout(() => {
+      this.markdownData = `
+`
+    }, 200);
+  }
+
+  appendMarkdownChange() {
+    const markdownCopy = (' ' + this.markdownData).slice(1);
+    this.triggerMarkdownChange();
+    this.markdownData = markdownCopy;
+    const escapeEvent: any = document.createEvent('CustomEvent');
+    escapeEvent.which = 27;
+    escapeEvent.initEvent('keypress', true, true);
+    document.getElementById("mArea").dispatchEvent(escapeEvent);
+    // this.markdownData = `${this.markdownData}
+    // `
+  }
   textAreaEmpty() {
     if (this.markdownData.length == 0) {
-      console.log("triggering")
-      this.insertAtCaret(" ")
-      this.cd.detectChanges();
+      this.triggerMarkdownChange();
     }
   }
 
@@ -91,7 +107,7 @@ export class MarkupComponent implements OnInit {
       if (newFile) {
         localStorage.removeItem("recentItem");
         this.currentMarkdown = null;
-        this.markdownData = "";
+        this.triggerMarkdownChange();
 
       }
     });
@@ -100,8 +116,10 @@ export class MarkupComponent implements OnInit {
   loadMarkdownListener() {
     this.markDownService.loadMarkdown.subscribe(markdown => {
       if (markdown) {
+        this.triggerMarkdownChange();
         this.markdownData = markdown.data;
         this.currentMarkdown = markdown;
+
       }
     });
   }
@@ -109,8 +127,6 @@ export class MarkupComponent implements OnInit {
   metaListener() {
     this.markDownService.metaAdded.subscribe(val => {
       if (val && val.hasOwnProperty("type") && val.type != "text") {
-        console.log("listener");
-        console.log(val);
         const imageDiv =
           TOOLBAR[val.type].startTag.replace(
             "enter description here",
@@ -161,18 +177,15 @@ export class MarkupComponent implements OnInit {
   }
 
   download(filename, text) {
-    var element = document.createElement("a");
+    let element = document.createElement("a");
     element.setAttribute(
       "href",
       "data:text/plain;charset=utf-8," + encodeURIComponent(text)
     );
     element.setAttribute("download", filename);
-
     element.style.display = "none";
     document.body.appendChild(element);
-
     element.click();
-
     document.body.removeChild(element);
   }
 
@@ -198,7 +211,6 @@ export class MarkupComponent implements OnInit {
       range = (document as any).selection.createRange();
       range.text = startTag;
     }
-    this.cd.detectChanges();
   }
 
   emojiAdded() {
@@ -246,14 +258,14 @@ export class MarkupComponent implements OnInit {
 
   insertAtCaret(text) {
     if (text) {
-      var txtarea = document.getElementById("mArea");
+      const txtarea = document.getElementById("mArea");
       if (!txtarea) {
         return;
       }
 
-      var scrollPos = txtarea.scrollTop;
-      var strPos = 0;
-      var br =
+      let scrollPos = txtarea.scrollTop;
+      let strPos = 0;
+      let br =
         (txtarea as any).selectionStart ||
           (txtarea as any).selectionStart == "0"
           ? "ff"
@@ -262,23 +274,23 @@ export class MarkupComponent implements OnInit {
             : false;
       if (br == "ie") {
         txtarea.focus();
-        var range = (document as any).selection.createRange();
+        let range = (document as any).selection.createRange();
         range.moveStart("character", -(txtarea as any).value.length);
         strPos = range.text.length;
       } else if (br == "ff") {
         strPos = (txtarea as any).selectionStart;
       }
 
-      var front = (txtarea as any).value.substring(0, strPos);
-      var back = (txtarea as any).value.substring(
+      let front = (txtarea as any).value.substring(0, strPos);
+      let back = (txtarea as any).value.substring(
         strPos,
         (txtarea as any).value.length
       );
-      (txtarea as any).value = front + text + back;
+      this.markdownData = front + text + back;
       strPos = strPos + text.length;
       if (br == "ie") {
         txtarea.focus();
-        var ieRange = (document as any).selection.createRange();
+        let ieRange = (document as any).selection.createRange();
         ieRange.moveStart("character", -(txtarea as any).value.length);
         ieRange.moveStart("character", strPos);
         ieRange.moveEnd("character", 0);
@@ -290,7 +302,9 @@ export class MarkupComponent implements OnInit {
       }
 
       txtarea.scrollTop = scrollPos;
-      this.cd.detectChanges();
+
     }
+
+
   }
 }

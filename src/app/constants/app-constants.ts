@@ -28,7 +28,7 @@ export const TOOLBAR = Object.freeze({
   },
   [OPTION.SIZE]: {
     text: "Heading ⌘+Shift+H",
-    startTag: "#"
+    startTag: "# "
   },
   [OPTION.STRIKE]: {
     text: "Strike ⌘+Shift+S",

@@ -194,6 +194,9 @@ export class MarkupComponent implements OnInit {
     let range;
     if (window.getSelection) {
       sel = window.getSelection();
+      if (sel && sel.anchorNode.parentElement.id != "splitMain") {
+        return;
+      }
       if (sel.rangeCount) {
         range = sel.getRangeAt(0);
         const selectedContent = sel.toString();

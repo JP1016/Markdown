@@ -10,6 +10,7 @@ import {
   Send,
   Moon,
   Sun,
+  File,
   Plus,
   Menu,
   BookOpen,
@@ -74,6 +75,7 @@ const icons = {
   Columns,
   GitMerge,
   AlertCircle,
+  File,
   Users
 };
 
@@ -81,4 +83,4 @@ const icons = {
   imports: [FeatherModule.pick(icons)],
   exports: [FeatherModule]
 })
-export class IconsModule {}
+export class IconsModule { }

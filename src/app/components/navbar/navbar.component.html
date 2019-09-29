@@ -125,7 +125,10 @@
         <i-feather class="fe-icon warning" name="alert-circle"></i-feather>
         {{ fileName ? fileName : "Untitled" }}</span
       >
-      <span *ngIf="fileName">{{ fileName }}</span>
+      <span *ngIf="fileName">
+        <i-feather class="fe-icon warning" name="file"></i-feather>
+        {{ fileName }}</span
+      >
 
       <a>
         <ntkme-github-button

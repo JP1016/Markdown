@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Paper</title>
+    <title>Markdown</title>
     <base href="/" />
     <link
       href="https://fonts.googleapis.com/css?family=Quicksand&display=swap"
@@ -49,18 +49,43 @@
   </body>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-146175118-4"
-  ></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-analytics.js"></script>
+
   <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "UA-146175118-4");
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBWc_KrLP3eWYWVOeqd2Uyq_SjHfNFe6BI",
+      authDomain: "markdown-cca6e.firebaseapp.com",
+      databaseURL: "https://markdown-cca6e.firebaseio.com",
+      projectId: "markdown-cca6e",
+      storageBucket: "",
+      messagingSenderId: "380726984442",
+      appId: "1:380726984442:web:96efabadc0646e46ac9343",
+      measurementId: "G-KDG58DJTCJ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    (function(sa, fbc) {
+      function load(f, c) {
+        var a = document.createElement("script");
+        a.async = 1;
+        a.src = f;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(a, s);
+      }
+      load(sa);
+      window.onload = function() {
+        firebase.initializeApp(fbc).performance();
+      };
+    })(
+      "https://www.gstatic.com/firebasejs/7.0.0/firebase-performance-standalone.js",
+      firebaseConfig
+    );
   </script>
 </html>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, HostListener } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog, MatSnackBar } from "@angular/material";
 import { MarkdownService } from "src/app/services/markdown.service";
@@ -17,12 +17,15 @@ export class MarkupComponent implements OnInit {
   options = OPTION;
   markupCtrl = new FormControl();
   @ViewChild("markupPad", { static: false }) markupPad: ElementRef;
+
+  @ViewChild('scrollRaw', { static: true }) scrollRaw: ElementRef;
+  @ViewChild('scrollMarkup', { static: true }) scrollMarkup: ElementRef;
   markdownMode: Boolean = true;
   action = {
     text: 50,
     markup: 50
   };
-  markdownData = SAMPLE;
+  markdownData;
   currentMarkdown = null;
   constructor(
     private snackBar: MatSnackBar,
@@ -33,10 +36,19 @@ export class MarkupComponent implements OnInit {
 
   //Hack to change markdown on empty/dynamic insertion
   triggerMarkdownChange() {
-    setTimeout(() => {
-      this.markdownData = `
+    this.markdownData = `
 `
-    }, 200);
+  }
+
+
+  updateScroll() {
+    const scrollOne = this.scrollRaw.nativeElement as HTMLElement;
+    const scrollTwo = this.scrollMarkup.nativeElement as HTMLElement;
+
+    console.log(scrollOne)
+    console.log(scrollTwo)
+    // do logic and set
+    scrollTwo.scrollLeft = scrollOne.scrollLeft;
   }
 
   appendMarkdownChange() {
@@ -54,6 +66,11 @@ export class MarkupComponent implements OnInit {
     if (this.markdownData.length == 0) {
       this.triggerMarkdownChange();
     }
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event) {
+    localStorage.setItem("recentItem", this.currentMarkdown.id);
   }
 
   saveFile() {
@@ -85,7 +102,7 @@ export class MarkupComponent implements OnInit {
         }
       });
     } else {
-      this.markdownData = localStorage.getItem("tempMarkdown") || "";
+      this.markdownData = localStorage.getItem("tempMarkdown") || SAMPLE;
     }
   }
 
@@ -116,7 +133,7 @@ export class MarkupComponent implements OnInit {
   loadMarkdownListener() {
     this.markDownService.loadMarkdown.subscribe(markdown => {
       if (markdown) {
-        this.triggerMarkdownChange();
+
         this.markdownData = markdown.data;
         this.currentMarkdown = markdown;
 

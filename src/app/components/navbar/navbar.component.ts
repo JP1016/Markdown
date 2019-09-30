@@ -51,6 +51,8 @@ export class NavbarComponent implements OnInit {
 
   loadedMarkupFromLocalStorage() {
     this.markDown.markdownFromLocalStorage.subscribe(markdown => {
+      console.log("MDLS N")
+      console.log(markdown)
       if (markdown) {
         this.fileName = markdown.title;
       }

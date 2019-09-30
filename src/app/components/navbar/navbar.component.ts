@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    const theme = localStorage.getItem("theme") || "light-mode";
+    const theme = localStorage.getItem("theme") || "dark-mode";
     this.switchTheme(theme);
     this.loadedMarkupFromLocalStorage();
   }

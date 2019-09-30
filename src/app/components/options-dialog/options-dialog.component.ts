@@ -27,20 +27,6 @@ export class OptionsDialogComponent implements OnInit {
     this.populateFormControl();
   }
 
-  nl2Br = (str, isXhtml = false) => {
-    const breakTag = isXhtml ? '<br />' : '<br>';
-    return String(str).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-  };
-
-  unescapeHtml(unsafe) {
-    return unsafe
-      .replace(/&amp;/g, "&")
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&quot;/g, "\"")
-      .replace(/&#039;/g, "'");
-  }
-
   populateFormControl() {
     this.addOption = this.fb.group({});
     const form = FORM_OPTIONS[this.data.type];
@@ -50,10 +36,7 @@ export class OptionsDialogComponent implements OnInit {
       value = FORM_OPTIONS[this.data.type]["default"];
     }
     if (preVal) {
-      preVal = preVal.substring(1, preVal.length - 1);
-      value = preVal.replace(/\\\\/g, `\\`);
-      value = this.unescapeHtml(value)
-
+      value = preVal;
     }
 
     form.fields.map(column => {
@@ -74,10 +57,7 @@ export class OptionsDialogComponent implements OnInit {
         data: { type: "link", ...this.addOption.value }
       });
     } else {
-      console.log(this.addOption.value.descr)
-      console.log(JSON.stringify(this.addOption.value.descr))
-      localStorage.setItem(this.data.type, this.nl2Br(JSON.stringify(this.addOption.value.descr)))
-      console.log(this.data.type)
+      localStorage.setItem(this.data.type, this.addOption.value.descr)
       this.optionsDialog.close({
         success: true,
         data: { type: "text", ...this.addOption.value }

@@ -51,8 +51,6 @@ export class NavbarComponent implements OnInit {
 
   loadedMarkupFromLocalStorage() {
     this.markDown.markdownFromLocalStorage.subscribe(markdown => {
-      console.log("MDLS N")
-      console.log(markdown)
       if (markdown) {
         this.fileName = markdown.title;
       }
@@ -102,61 +100,61 @@ export class NavbarComponent implements OnInit {
   ngAfterViewInit(): void {
     this.shortcuts.push(
       {
-        key: ["cmd + shift + b"],
+        key: ["cmd + shift + b", "ctrl + shift + b"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.BOLD),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + i"],
+        key: ["cmd + shift + i", "ctrl + shift + i"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.ITALIC),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + H"],
+        key: ["cmd + shift + H", "ctrl + shift + H"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.SIZE),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + L"],
+        key: ["cmd + shift + L", "ctrl + shift + L"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.LIST),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + C"],
+        key: ["cmd + shift + C", "ctrl + shift + C"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.CHECK_BOX),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + Q"],
+        key: ["cmd + shift + Q", "ctrl + shift + Q"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.BLOCK_QUOTE),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + D"],
+        key: ["cmd + shift + D", "ctrl + shift + D"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.CODE),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + T"],
+        key: ["cmd + shift + T", "ctrl + shift + T"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.TABLE),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + K"],
+        key: ["cmd + shift + K", "ctrl + shift + K"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.LINK),
         preventDefault: true
       },
       {
-        key: ["cmd + shift + G"],
+        key: ["cmd + shift + G", "ctrl + shift + G"],
         allowIn: [AllowIn.Textarea],
         command: e => this.markDown.optionChanged.next(OPTION.IMAGE),
         preventDefault: true

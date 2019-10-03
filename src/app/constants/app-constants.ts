@@ -73,19 +73,42 @@ export const TOOLBAR = Object.freeze({
 
 export const CONTRIBUTORS = `
 ## Contributors ✨
-Thanks goes to these wonderful people :
+
+Thanks goes to these wonderful people
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
 <table>
-    <tr>
-        <td align="center">
-            <a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds" />
-                <br /><sub><b>Kent C. Dodds</b></sub></a>
-            <br /><a href="#question-kentcdodds" title="Answering Questions">💬</a> <a href="https://github.com/all-contributors/all-contributors/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#talk-kentcdodds" title="Talks">📢</a></td>
-        <td align="center">
-            <a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels" />
-                <br /><sub><b>Jeroen Engels</b></sub></a>
-            <br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a> <a href="#review-jfmengels" title="Reviewed Pull Requests">👀</a> <a href="#tool-jfmengels" title="Tools">🔧</a></td>
-    </tr>
-</table>`
+	<tr>
+		<td align="center">
+			<a href="https://www.devzstudio.com">
+				<img src="https://avatars2.githubusercontent.com/u/5446313?s=460&v=4" width="100px;" alt="Jithin Pariyarath" />
+				<br />
+				<sub>
+					<b>Jithin Pariyarath</b>
+				</sub>
+			</a>
+			<br />
+			<a href="https://github.com/JP1016" title="Answering Questions">💬</a>
+			<a href="https://github.com/JP1016" title="Documentation">📖</a>
+			<a href="https://github.com/JP1016" title="Reviewed Pull Requests">👀</a>
+			<a href="https://github.com/JP1016" title="Talks">📢</a>
+		</td>
+		<td align="center">
+			<a href="https://github.com/jfmengels">
+				<img src="https://avatars2.githubusercontent.com/u/15993065?s=460&v=4" width="100px;" alt="Jijin Pariyarath" />
+				<br />
+				<sub>
+					<b>Jijin Pariyarath</b>
+				</sub>
+			</a>
+			<br />
+			<a href="https://github.com/pjijin" title="Documentation">📖</a>
+			<a href="https://github.com/pjijin" title="Reviewed Pull Requests">👀</a>
+			<a href="https://github.com/pjijin" title="Tools">🔧</a>
+		</td>
+		<tr>
+		</table>`
 
 export const CONTRIBUTION_GUIDE = `
 Contributing
